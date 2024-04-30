@@ -1,102 +1,56 @@
-// let arr = [2, 10, 21, 32];
+// const express = require("express");
+// const productsRouter = require('./Routes/productsRoutes');
+// const mongoose = require('mongoose')
+// const app = express();
 
-// function printpretty(elem) {
-//     console.log(':', elem);
-// }
+// app.use(express.json());
+// app.use('   /api/products', productsRouter);
 
-// function printArray(arr) {
-//     // for(let i=0;i<arr.length;i++){
-//     //     printpretty(arr(i));
-//     // }
-//     //     arr.forEach(printpretty);
-//     // }
-//     arr.map((a, b, c) => {
-//         console.log(':', elem);
+// const url = 'mongodb+srv://$_USERNAME_$:$_PASSWORD_$@cluster0.xergjlh.mongodb.net/$_DNB_NAME_$'
 
+// const databaseUser = 'ekata';
+// const databasePassword = '1234';
+// const databaseName = 'Amazonclone';
 
+// let dblink = url.replace("$_USERNAME_$", databaseUser);
+// dblink = dblink.replace("$_PASSWORD_$", databasePassword);
+// dblink = dblink.replace("$_DNB_NAME_$", databaseName);
+
+// console.log(dblink);
+// mongoose.connect(dblink)
+//     .then(() => console.log('---------Database-------'))
+//     .catch((error) => {
+//         console.log("DB not connected", error)
 //     });
-// }
+
+        
+
+// app.listen(1500,
+//     () => console.log('-----App Started------'));
 
 
-// printArray(arr);
+const express = require("express");
+const productsRouter = require('./Routes/productsRoutes'); // Assuming you have defined this router
+const mongoose = require('mongoose');
+const app = express();
 
 
-// function printpretty(elem){
-// console.log(':',elem);
-// }
-// time is in milliseconds
-// 
+// Middleware to parse JSON bodies
+app.use(express.json()); 
+app.use('/api/products', productsRouter); 
 
 
-// console.log('prettystart');
+const databaseUser = 'ekata';
+const databasePassword = '1234';
+const databaseName = 'Amazonclone';
 
-// function printpretty(){
-//     console.log('prettystart');
-//     let ans = 2+3;
-//     console.log('prettyend');
-// }
-//     setTimeout(printpretty,30000);
+const url = `mongodb+srv://${databaseUser}:${databasePassword}@cluster0.xergjlh.mongodb.net/${databaseName}`;
 
-//     console.log('GEC END');
+mongoose.connect(url) 
+    .then(() => console.log('---------Database connected-------'))
+    .catch((error) => {
+        console.log("DB connection failed", error);
+    });
 
-
-// const btn = document.getElementarybyId('btn');
-// btn.addeventislistener("click",printpretty);
-
-// console.log('start')
-// const req=fetch("https://www.google.com/search?q=gitub&rlz=1C1OPNX_enIN1102IN1102&oq=gitub&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIVCAEQLhgKGIMBGMcBGLEDGNEDGIAEMgwIAhAAGAoYsQMYgAQyDAgDEAAYChixAxiABDIMCAQQABgKGLEDGIAEMgkIBRAAGAoYgAQyDAgGEAAYChixAxiABDIGCAcQBRhA0gEIMzc2M2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8");
-
-// console.log('req');
-// req.then(()=>console.log('Fetched'));
-// console.log('End');
-
-// console.log('start')
-
-// const req=fetch('https://dummyjson.com/products/1')
-// const res=req.then((res)=>res.json())
-// res.then((data)=> console.log(data));
-// console.log('End')
-
-// // .then(res => res.json())
-// // // .then(json => console.log(json))
-
-// console.log('start')
-
-// fetch('https://dummyjson.com/products/1')
-// .then((res)=>res.json())
-// .then((data)=> console.log(data))
-// .catch(err) => {
-// console.log('End')
-// }
-
-
-
-    console.log("...APP Started...");
-
-   function callApp() {
-    fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=1fb5e006689343749f05eab91af058e7")
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-        });
-}
-
-callApp();
-
-function renderUI(){
-    const root = document.getElementById("root");
-    const div = document.createElement("div");
-    div.innerText = 'card';   
-    root.appendChild(div)
-    const articles = data.articles;
-    console.log(articles);
-
-   
-    const ar = articles[0];
-    console.log(ar);
-
-    
-}
-renderUI();
+const port = 1500;
+app.listen(port, () => console.log(`Server started on port ${port}`));
